@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Batch Generator</title>
+  <link rel="stylesheet" href="./src/style.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>QR Gen</h1>
+        <p>Batch Generator</p>
+      </div>
+
+      <div class="control-group">
+        <label for="excelUpload" class="upload-btn primary">
+          <span class="icon">📄</span> Upload Excel
+          <input type="file" id="excelUpload" accept=".xlsx, .xls" hidden />
+        </label>
+        <div id="excelFileName" class="file-name">No file chosen</div>
+      </div>
+
+      <div class="control-group">
+        <label for="bgUpload" class="upload-btn secondary">
+          <span class="icon">🖼️</span> Upload Background
+          <input type="file" id="bgUpload" accept="image/*" hidden />
+        </label>
+        <div id="bgFileName" class="file-name">No file chosen</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="control-group disabled" id="columnControls">
+        <label>QR Data Column</label>
+        <select id="qrColumnSelect">
+          <option value="" disabled selected>Select Column</option>
+        </select>
+
+        <label>Text Label Column</label>
+        <select id="textColumnSelect">
+          <option value="" disabled selected>Select Column</option>
+          <option value="none">-- None --</option>
+        </select>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="control-group">
+        <h3>QR Settings</h3>
+        <label>Size</label>
+        <input type="range" id="qrSizeInput" min="50" max="500" value="150">
+
+        <label>Color</label>
+        <input type="color" id="qrColorInput" value="#000000">
+      </div>
+
+      <div class="control-group">
+        <h3>Text Settings</h3>
+        <label>Size</label>
+        <input type="range" id="textSizeInput" min="10" max="100" value="16">
+
+        <label>Color</label>
+        <input type="color" id="textColorInput" value="#000000">
+      </div>
+
+      <div class="spacer"></div>
+
+      <button id="generateBtn" class="generate-btn" disabled>
+        Generate Batch 🚀
+      </button>
+    </aside>
+
+    <main class="preview-area">
+      <div class="canvas-container" id="canvasContainer">
+        <img id="previewBg" class="preview-bg" src="" alt="" style="display: none;" />
+        <div id="dragContainer">
+          <div id="qrElement" class="draggable item-qr" style="display: none;">
+            <div id="qrPlaceholder"></div>
+          </div>
+          <div id="textElement" class="draggable item-text" style="display: none;">
+            <span id="textPlaceholder">Sample Text</span>
+          </div>
+        </div>
+        <div class="empty-state" id="emptyState">
+          <h2>Start by uploading a background image</h2>
+          <p>Drag and drop support included</p>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
